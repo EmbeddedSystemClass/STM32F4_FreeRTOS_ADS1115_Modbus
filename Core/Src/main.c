@@ -442,6 +442,7 @@ void ADS1115Thread(void const * argument)
   {
 		for( int i = 0; i < 2; i++) {
 			ADSwrite[0] = 0x01;
+			if(Ads1115QueryMode == differentialMode)
 			switch(i) {
 				case(0):
 					ADSwrite[1] = 0x81; // 10000001
@@ -449,6 +450,15 @@ void ADS1115Thread(void const * argument)
 				case(1):
 					ADSwrite[1] = 0xB1;// 10110001
 				break;
+			}
+			else // single-end mode
+			{
+			case(0):
+				ADSwrite[1] = 0x81; // 10000001
+			break;
+			case(1):
+				ADSwrite[1] = 0xB1;// 10110001
+			break;
 //				case(2):
 //					ADSwrite[1] = 0xE1;
 //				break;
